@@ -7,7 +7,7 @@ import marker from './marker.png';
 import Header from './components/Header';
 import Banner from './components/Banner/Banner';
 import Footer from './components/Footer';
-import { getAllMovies, getMoviesWithPromoBanner, getMoviesLocations } from './Actions/MovieActions';
+import { getAllMovies, getMoviesWithPromoBanner, getMoviesLocations, getMoviesDetails } from './Actions/MovieActions';
 import FeaturedMovies from './components/FeaturedMovies';
 import MapSection from './components/MapSection';
 import Search from './components/Search';
@@ -18,6 +18,10 @@ function App() {
     loading: true,
     movies: []
   });
+  const [movieDetails, setMovieDetails] = useState({
+    loading: true,
+    movie: []
+  })
   const [filteredList, setFilteredList] = useState({
     loading: true,
     movies: []
@@ -88,14 +92,21 @@ function App() {
     localMovies = moviesList.movies;
   }
 
+  const getmovieDetails = async (title, locations) => {
+    setMovieDetails({
+      loading: false,
+      movie: await getMoviesDetails(title, locations)
+    })
+  }
+
   return (
     <>
       <Header />
       <Banner movieBanner={movieBanner}/>
       <FeaturedMovies moviesWithBanner={moviesListWithBanner}/>
       <Search locationList={locationLists} searchHandler={searchHandler}/>
-      <MapSection zoomLevel={6} moviesList={filteredList} marker={marker} moviesLength={moviesList.movies.length} />
-      <Model />
+      <MapSection zoomLevel={6} moviesList={filteredList} marker={marker} moviesLength={moviesList.movies.length} movieDetails={getmovieDetails}/>
+      <Model details={movieDetails}/>
       <Footer />
       </>
   );

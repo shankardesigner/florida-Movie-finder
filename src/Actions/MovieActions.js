@@ -42,3 +42,16 @@ export const getMoviesLocations = async () => {
         console.log(error)
     }
 }
+
+export const getMoviesDetails = async (title,locations) => {
+    try {
+        return await axios.get(`${API_URI}/get-movies-details`, {
+            params: {
+                "title":title,
+                "location":locations
+              }
+        }).then(res => res.data)
+    } catch (error) {
+        console.log(error)
+    }
+}

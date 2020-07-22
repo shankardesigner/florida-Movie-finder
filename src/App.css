@@ -184,3 +184,20 @@ body {
     display: block !important;
     background: rgba(0, 0, 0, 0.2);
 }
+
+.image {
+    overflow: hidden;
+}
+
+.image img {
+    width: 100%;
+    height: auto;
+}
+
+.modal .close {
+    font-size: 30px;
+}
+
+.modal .col {
+    padding-top: 20px;
+}

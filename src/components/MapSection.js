@@ -11,7 +11,7 @@ const createMapOptions = (maps) => {
     }
   }
 
-function MapSection({ zoomLevel, moviesList:{movies,loading}, marker, moviesLength }) {
+function MapSection({ zoomLevel, moviesList:{movies,loading}, marker, moviesLength, movieDetails }) {
     const [locationWithLatLong, setLocationWithLatLong] = useState(null);
     const [show, setShow] = useState(false);
     let locatlLocation;
@@ -41,10 +41,20 @@ function MapSection({ zoomLevel, moviesList:{movies,loading}, marker, moviesLeng
         });
 
         const detailsBtn = pin.querySelector(".details-btn");
+        const title = pin.querySelector(".title").innerHTML;
+        const locations = pin.querySelector(".locations").innerHTML;
 
         detailsBtn.addEventListener('click', () => {
             const modal = document.querySelector(".modal");
             modal.classList.add("show");
+            movieDetails(title, locations);
+
+            const closeBtn = document.querySelector(".modal .close");
+
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.classList.remove("show");
+            });
         });
     }
     
