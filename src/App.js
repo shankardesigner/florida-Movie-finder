@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import './App.css';
 import movieBanner from './movieBanner.jpg';
 import marker from './marker.png';
@@ -10,6 +11,7 @@ import { getAllMovies, getMoviesWithPromoBanner, getMoviesLocations } from './Ac
 import FeaturedMovies from './components/FeaturedMovies';
 import MapSection from './components/MapSection';
 import Search from './components/Search';
+import Model from './components/Model';
 
 function App() {
   const [moviesList, setMoviesList] = useState({
@@ -92,9 +94,10 @@ function App() {
       <Banner movieBanner={movieBanner}/>
       <FeaturedMovies moviesWithBanner={moviesListWithBanner}/>
       <Search locationList={locationLists} searchHandler={searchHandler}/>
-      <MapSection zoomLevel={6} moviesList={filteredList} marker={marker}/>
+      <MapSection zoomLevel={6} moviesList={filteredList} marker={marker} moviesLength={moviesList.movies.length} />
+      <Model />
       <Footer />
-    </>
+      </>
   );
 }
 

@@ -3,6 +3,7 @@ import SingleMovie from './SingleMovie'
 import Spinner from './Spinner';
 
 function FeaturedMovies({moviesWithBanner}) {
+    console.log(moviesWithBanner)
     const {loading, movies} = moviesWithBanner;
     let featuredMovies;
 

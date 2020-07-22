@@ -11,13 +11,11 @@ const createMapOptions = (maps) => {
     }
   }
 
-function MapSection({ zoomLevel, moviesList:{movies,loading}, marker }) {
+function MapSection({ zoomLevel, moviesList:{movies,loading}, marker, moviesLength }) {
     const [locationWithLatLong, setLocationWithLatLong] = useState(null);
     const [show, setShow] = useState(false);
     let locatlLocation;
     let locationPins;
-
-    console.log(movies)
 
     useEffect(() => {
         if(movies != undefined) setLocationWithLatLong(movies[0])
@@ -41,6 +39,13 @@ function MapSection({ zoomLevel, moviesList:{movies,loading}, marker }) {
         close.addEventListener('click', () => {
             pin.classList.remove("active");
         });
+
+        const detailsBtn = pin.querySelector(".details-btn");
+
+        detailsBtn.addEventListener('click', () => {
+            const modal = document.querySelector(".modal");
+            modal.classList.add("show");
+        });
     }
     
     if(movies!= undefined && movies.length > 0) {
@@ -55,6 +60,9 @@ function MapSection({ zoomLevel, moviesList:{movies,loading}, marker }) {
     return (
         <div className="map-block">
             <div className="google-map">
+                <div className="container">
+                <h6 className="mb-4">{movies.length} shown out of {moviesLength}</h6>
+                </div>
             {!loading && locatlLocation ? (
             <>
         <GoogleMapReact
